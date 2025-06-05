@@ -1,0 +1,104 @@
+---
+import { getCollection } from "astro:content";
+import { Picture } from "astro:assets";
+import Layout from "@/layouts/Layout.astro";
+import Container from "@/components/container.astro";
+import Sectionhead from "@/components/sectionhead.astro";
+
+// Filter team entries with 'draft: false' & date before current date
+const publishedTeamMembers = await getCollection("team", ({ data }) => {
+  return !data.draft && data.publishDate < new Date();
+});
+---
+
+<Layout title="Terms of Service">
+  <Container>
+    <Sectionhead>
+      <Fragment slot="title">Terms of Service</Fragment>
+      <Fragment slot="desc">By using Just Do Swift, you agree to these terms.</Fragment>
+    </Sectionhead>
+
+    <div class="flex flex-col gap-3 mx-auto max-w-4xl mt-16">
+  
+      <h2 class="font-bold text-3xl text-gray-800">
+        Use of content
+      </h2>
+      <p class="text-lg leading-relaxed text-slate-500">
+        All content is for your personal use and learning only.<br>
+        Do not redistribute, resell, or publish our materials without permission.
+      </p>
+
+      <h2 class="font-bold text-3xl text-gray-800">
+        Accuracy of information
+      </h2>
+      <p class="text-lg leading-relaxed text-slate-500">
+        We do our best to keep all content accurate and up-to-date, but it is provided for informational purposes only.
+      </p>
+
+      <h2 class="font-bold text-3xl text-gray-800">
+        User responsibility
+      </h2>
+      <p class="text-lg leading-relaxed text-slate-500">
+        You are responsible for how you use our content and code.<br>
+        We are not liable for any damages or losses resulting from your use of our services.
+      </p>
+
+      <h2 class="font-bold text-3xl text-gray-800">
+        Payments
+      </h2>
+      <p class="text-lg leading-relaxed text-slate-500">
+        All purchases are processed securely via Stripe.<br>
+        Payments are non-refundable except where required by law.
+      </p>
+
+      <h2 class="font-bold text-3xl text-gray-800">
+        Account termination
+      </h2>
+      <p class="text-lg leading-relaxed text-slate-500">
+        We may suspend or terminate your account if you violate these terms or use our service in an unlawful way.
+      </p>
+
+      <h2 class="font-bold text-3xl text-gray-800">
+        Changes to these terms
+      </h2>
+      <p class="text-lg leading-relaxed text-slate-500">
+        We may update these terms from time to time.<br>
+        Continued use of Just Do Swift means you accept the new terms.
+      </p>
+
+      <h2 class="font-bold text-3xl text-gray-800">
+        Contact
+      </h2>
+      <p class="text-lg leading-relaxed text-slate-500">
+        If you have any questions about these terms, please contact us at <a href="mailto:justdoswift@substack.com" class="underline">justdoswift@substack.com</a>.
+      </p>
+    </div>
+
+
+    <!-- <div class="grid md:grid-cols-3 gap-10 mx-auto max-w-4xl mt-12">
+      {
+        publishedTeamMembers.map((teamMemberEntry) => (
+          <div class="group">
+            <div class="w-full aspect-square">
+              <Picture
+                src={teamMemberEntry.data.avatar.src}
+                alt={teamMemberEntry.data.avatar.alt}
+                sizes="(max-width: 800px) 100vw, 400px"
+                width={400}
+                height={400}
+                class="w-full rounded-sm transition group-hover:-translate-y-1 group-hover:shadow-xl bg-white object-cover object-center aspect-square"
+              />
+            </div>
+
+            <div class="mt-4 text-center">
+              <h2 class="text-lg text-gray-800">{teamMemberEntry.data.name}</h2>
+              <h3 class="text-sm text-slate-500">
+                {teamMemberEntry.data.title}
+              </h3>
+            </div>
+          </div>
+        ))
+      }
+    </div> -->
+  </Container>
+</Layout>
