@@ -28,7 +28,7 @@ const { plan } = Astro.props;
       {
         plan.features.map((item) => (
           <li class="flex items-start gap-3 text-gray-800">
-            <Tick class="w-6 h-6" />
+            <Tick class="w-6 h-6 shrink-0" />
             <span>{item}</span>
           </li>
         ))
