@@ -18,7 +18,7 @@ These Terms and Conditions (“Terms”) govern your use of the products and ser
 
 ## 1. Products and Services
 
-We provide digital products and educational content, including but not limited to:
+We provide digital products, including but not limited to:
 
 - Paid and free newsletters  
 - SwiftUI tutorial eBooks and guides  
@@ -58,7 +58,7 @@ All products are provided “as is” and are subject to the terms below.
 
 ## 5. Support and Updates
 
-- Basic product support is available via email: **support@justdoswift.com**  
+- For product-related questions or content access issues, feel free to contact us at **contact@justdoswift.com**.
 - We aim to respond to support inquiries within 2–3 business days.  
 - Updates to products may be provided at our discretion and may be subject to versioning or additional licensing.  
 
@@ -67,7 +67,7 @@ All products are provided “as is” and are subject to the terms below.
 ## 6. Refunds and Cancellations
 
 - Due to the nature of digital products, all sales are considered final.  
-- Refunds may be offered at our discretion in cases of duplicate purchase, non-delivery, or major technical issues.  
+- Refund requests will be considered for issues such as duplicate purchases, delivery failures, or major technical errors. 
 - You may cancel subscription services at any time through your account dashboard or by contacting us.
 
 ---
@@ -80,7 +80,7 @@ To the maximum extent permitted by law, Just Do Swift, LLC shall not be liable f
 
 ## 8. Governing Law
 
-These Terms are governed by the laws of the State of **[Your Company State, e.g., Delaware or Wyoming]**, United States. Any legal disputes shall be handled in the courts located in that state.
+These Terms are governed by the laws of the State of **Delaware**, United States. Any legal disputes shall be handled in the courts located in that state.
 
 ---
 

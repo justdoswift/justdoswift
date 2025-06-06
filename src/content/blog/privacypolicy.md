@@ -64,7 +64,7 @@ Depending on your location, you may have the right to:
 - Opt out of marketing communications.
 - Request data portability.
 
-To make a request, email us at **support@justdoswift.com**. We may verify your identity before processing your request.
+To make a request, email us at **contact@justdoswift.com**. We may verify your identity before processing your request.
 
 ---
 
@@ -96,5 +96,5 @@ We may update this Privacy Policy from time to time. We will notify you by updat
 
 **Just Do Swift, LLC**  
 131 Continental Dr Suite 305 Newark, DE, 19713 US  
-Email: **support@justdoswift.com**
+Email: **contact@justdoswift.com**
 
