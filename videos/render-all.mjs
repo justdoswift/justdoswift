@@ -34,8 +34,12 @@ async function render(entry) {
   if (stream?.width !== 1080 || stream.height !== 1080 || stream.codec_name !== "h264" || !["yuv420p", "yuvj420p"].includes(stream.pix_fmt) || Number(stream.nb_frames) !== 240 || stream.r_frame_rate !== "30/1" || Number(metadata.format.duration) !== 8) {
     throw new Error(`Unexpected output metadata for ${id}`);
   }
+  const loopReport = await run("ffmpeg", ["-hide_banner", "-i", path, "-filter_complex", "[0:v]split[a][b];[a]select=eq(n\\,0),setpts=PTS-STARTPTS[first];[b]select=eq(n\\,239),setpts=PTS-STARTPTS[last];[first][last]ssim", "-an", "-f", "null", "-"]);
+  const loopSimilarity = Number(loopReport.match(/All:([0-9.]+)/)?.[1]);
+  // Compression can introduce tiny differences even for identical source frames.
+  if (!(loopSimilarity >= 0.995)) throw new Error(`Loop boundary mismatch for ${id}: ${loopSimilarity}`);
   const size = (await stat(path)).size;
-  results.push({ id, slug, width: stream.width, height: stream.height, fps: 30, frames: 240, duration: 8, bytes: size, sha256: createHash("sha256").update(await readFile(path)).digest("hex"), kind: "remotion-design-demonstration" });
+  results.push({ id, slug, width: stream.width, height: stream.height, fps: 30, frames: 240, duration: 8, bytes: size, sha256: createHash("sha256").update(await readFile(path)).digest("hex"), loopSimilarity, kind: "remotion-design-demonstration" });
   console.log(`Verified ${slug}.mp4 · ${(size / 1024).toFixed(0)} KB · 1080 × 1080 · 8s`);
 }
 // Two independent renders, each bounded to two Chromium tabs.

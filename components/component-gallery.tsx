@@ -2,13 +2,16 @@
 
 import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
-import { ArrowUpRight, Search, X } from "lucide-react";
+import { ArrowUpRight, Pause, Play, Search, X } from "lucide-react";
+import { useReducedMotion } from "motion/react";
 import { useMemo, useState } from "react";
 import { PreviewStage } from "@/components/preview-stage";
 import { categories, swiftComponents } from "@/lib/components";
 
 export function ComponentGallery() {
   const [query, setQuery] = useState("");
+  const [paused, setPaused] = useState(false);
+  const reducedMotion = useReducedMotion();
   const params = useSearchParams();
   const router = useRouter();
   const candidate = params.get("category");
@@ -23,14 +26,17 @@ export function ComponentGallery() {
         </div>
         <div className="library-search"><Search /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Filter…" aria-label="Filter components" />{query && <button type="button" onClick={() => setQuery("")} aria-label="Clear filter"><X /></button>}</div>
       </div>
-      <p className="result-count" aria-live="polite">{filtered.length} {filtered.length === 1 ? "component" : "components"}</p>
+      <div className="gallery-meta">
+        <p className="result-count" aria-live="polite">{filtered.length} {filtered.length === 1 ? "component" : "components"}</p>
+        {filtered.length > 0 && (reducedMotion ? <span className="motion-preference">Reduced motion</span> : <button className="preview-toggle" type="button" onClick={() => setPaused(value => !value)} aria-label={paused ? "Play previews" : "Pause previews"}>{paused ? <Play /> : <Pause />}{paused ? "Play previews" : "Pause previews"}</button>)}
+      </div>
       {filtered.length ? (
         <div className="component-grid">
           {filtered.map((component) => (
             <article className="component-card" key={component.slug}>
               <Link href={`/components/${component.slug}`} className="card-hit" aria-label={`View ${component.title}`} />
-              <div className={`card-preview${component.video ? " card-preview-video" : ""}`} aria-hidden="true"><PreviewStage {...component} compact /><span className="preview-type">{component.videoKind === "remotion" ? "Remotion · 8s" : component.video ? "MP4" : "Preview"}</span><span className="card-open"><ArrowUpRight /></span></div>
-              <div className="card-copy"><div className="card-title-row"><h2>{component.title}</h2><span>{component.ios}</span></div><p>{component.description}</p><div className="card-category">{component.category}<span>SwiftUI</span></div></div>
+              <div className={`card-preview${component.video ? " card-preview-video" : ""}`} aria-hidden="true"><PreviewStage {...component} compact paused={paused} />{!component.video && <span className="preview-type">Interactive</span>}<span className="card-open"><ArrowUpRight /></span></div>
+              <div className="card-copy"><div className="card-title-row"><h2>{component.title}</h2><span>{component.ios}</span></div><p>{component.description}</p><div className="card-category">{component.category}<span>{component.videoKind === "remotion" ? "Remotion · 8s" : component.video ? "Video" : "Interactive"}</span></div></div>
             </article>
           ))}
         </div>

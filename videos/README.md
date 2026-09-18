@@ -22,7 +22,7 @@ npm run dev -- --no-open
 npm run render:all
 ```
 
-This renders six 1080×1080 H.264 MP4s and PNG posters into `../public/previews/`. The script verifies dimensions, frame count, codec, frame rate, duration, and writes SHA-256 hashes to `manifest.json`. Requires `ffmpeg` and `ffprobe` on PATH. Versions of Remotion packages are pinned in the lockfile.
+This renders six 1080×1080 H.264 MP4s and PNG posters into `../public/previews/`. The script verifies dimensions, frame count, codec, frame rate, duration and first/last-frame similarity, then writes SHA-256 hashes and loop scores to `manifest.json`. Requires `ffmpeg` and `ffprobe` on PATH. Versions of Remotion packages are pinned in the lockfile.
 
 To render only one composition:
 
@@ -32,7 +32,7 @@ npx remotion render src/index.ts PhotoStack out/photo-stack.mp4
 
 Composition IDs: `PhotoStack`, `HoldToConfirm`, `MiniPlayer`, `ReactionPicker`, `SendButton`, `PullToSearch`.
 
-`src/Scene.tsx` contains the shared editorial frame, original SVG artwork, touch indicators and loop reset. Each study has its own source file. Animation is driven exclusively by Remotion frames; there are no CSS animation timers or runtime network assets.
+`src/Scene.tsx` contains the quiet shared frame, original SVG artwork and touch indicators. Each study owns its animation and returns naturally to its opening state; there is no full-frame crossfade. Animation is driven exclusively by Remotion frames, with no CSS animation timers or runtime network assets.
 
 Run `npm run lint` before rendering. See `DESIGN.md` for the visual direction and timing plan.
 

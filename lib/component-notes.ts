@@ -5,7 +5,7 @@ export const componentNotes: Record<string, { title: string; text: string }[]> =
     { title: "Tune the feel", text: "调整卡片宽高、展开间距和 spring 的 response / dampingFraction。Reduce Motion 下关闭旋转与弹簧动画。" },
   ],
   "hold-to-confirm": [
-    { title: "Commit only after a complete hold", text: "ContinuousClock 驱动进度。提前松手或手指偏离 28 点会取消，达到阈值仅执行一次回调。离开页面时取消任务。" },
+    { title: "Commit only after a complete hold", text: "ContinuousClock 驱动进度。提前松手或偏离 28 点会取消；同一次按住只确认一次，即使成功提示已复位。系统中断手势或离开页面也会清理任务。" },
     { title: "A confirmation everyone can use", text: "VoiceOver 可以直接激活确认，不要求持续按住。根据实际业务选择操作是否需要二次确认，不应把长按当成唯一保护。" },
     { title: "Make it yours", text: "title 控制提示，duration 控制长按时长，tint 控制色调。演示默认为 1.2 秒，完成后保留反馈 1.6 秒。" },
   ],
@@ -16,7 +16,7 @@ export const componentNotes: Record<string, { title: string; text: string }[]> =
   ],
   "reaction-picker": [
     { title: "Preview before you commit", text: "LongPressGesture 与 DragGesture 串联。滑动只改变 highlighted，松手后才更新 selection，避免中途修改真实选择。" },
-    { title: "Accessible reactions", text: "默认提供五种表情，每种都有文字标签和独立无障碍操作。可通过 options 传入自己的 ReactionOption 数组。" },
+    { title: "Accessible reactions", text: "默认五种表情，均有独立无障碍操作。再次轻点可移除选择，VoiceOver 提供 Remove reaction。通过 options 传入自己的选项。" },
     { title: "Leave room above the trigger", text: "表情托盘向上展开，接入列表时要预留顶部空间，避免被父视图裁切。可调整 0.3 秒长按门槛和 50 点选项间距。" },
   ],
   "send-button": [

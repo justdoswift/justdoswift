@@ -47,10 +47,16 @@ struct ReactionPicker: View {
                         withAnimation(motion) { open = false }
                         highlighted = 0
                     })
+                .onTapGesture {
+                    if selection != nil { selection = nil }
+                }
                 .accessibilityElement(children: .ignore)
                 .accessibilityLabel(selection.map { "Reaction: \($0.label)" } ?? "Choose a reaction")
                 .accessibilityAddTraits(.isButton)
                 .accessibilityActions {
+                    if selection != nil {
+                        Button("Remove reaction") { selection = nil }
+                    }
                     ForEach(options) { option in
                         Button(option.label) { selection = option }
                     }
@@ -76,7 +82,7 @@ struct ReactionPicker: View {
             Spacer(minLength: 0)
         }
         .sensoryFeedback(.selection, trigger: highlighted)
-        .onDisappear { open = false }
+        .onDisappear { open = false; highlighted = 0 }
     }
     private var motion: Animation? { reduceMotion ? nil : .spring(response: 0.28, dampingFraction: 0.68) }
 }
@@ -89,9 +95,9 @@ struct ReactionPickerDemo: View {
                 Text("A").font(.headline).frame(width: 40, height: 40).background(.orange.opacity(0.15), in: Circle())
                 VStack(alignment: .leading) { Text("Alex").bold(); Text("Just now").font(.caption).foregroundStyle(.secondary) }
             }
-            Text("Made a little time for the things I love.").font(.title3).padding(.bottom, 60)
+            Text("Made time for the things I love.").font(.title3).padding(.bottom, 60)
             ReactionPicker(selection: $selection)
-            Text(selection.map { "You reacted with \($0.label.lowercased())." } ?? "Hold, slide, release.")
+            Text(selection.map { "\($0.label). Tap to remove." } ?? "Hold, slide, release.")
                 .font(.caption).foregroundStyle(.secondary)
         }.padding(28).frame(maxWidth: 360)
             .background(Color(.systemGroupedBackground), in: RoundedRectangle(cornerRadius: 28))

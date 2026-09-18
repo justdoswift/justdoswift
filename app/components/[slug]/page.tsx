@@ -33,7 +33,7 @@ export default async function ComponentPage({ params }: PageProps) {
           <div className="breadcrumb"><Link href="/">Components</Link><ChevronRight /><span>{component.title}</span></div>
           <header className="detail-heading"><div><h1>{component.title}</h1><p>{component.description}</p></div><CopyCodeButton code={component.source} compact /></header>
           <ComponentWorkbench component={component} />
-          <section className="doc-section" id="usage"><h2>Usage</h2><p>将 Code 中的组件加入项目，然后在你的视图里调用。</p>{component.demo && <p className="source-verification">源码含 {component.demo} 与 #Preview，可在 Xcode 中预览。已通过 Swift 6 / iOS 17 目标的编译检查；视频是 Remotion 重建的设计演示，原生效果请以运行源码为准。</p>}<CodeBlock code={component.usage} label="Example.swift" /></section>
+          <section className="doc-section" id="usage"><h2>Usage</h2><p>将 Code 中的组件加入项目，然后在你的视图里调用。</p>{component.demo && <p className="source-verification">内含 {component.demo} 和 #Preview。已通过 Swift 6 / iOS 17 编译检查。</p>}<CodeBlock code={component.usage} label="Example.swift" /></section>
           <section className="doc-section" id="notes"><h2>How it works</h2><div className="implementation-notes">{componentNotes[slug]?.map((note) => <div key={note.title}><h3>{note.title}</h3><p>{note.text}</p></div>)}</div></section>
           <section className="doc-section" id="related"><h2>Related components</h2><div className="related-grid">{related.map((item) => <Link key={item.slug} href={`/components/${item.slug}`}><h3>{item.title}<ArrowUpRight /></h3><p>{item.description}</p></Link>)}</div></section>
           <SiteFooter />

@@ -8,7 +8,7 @@ Requires Swift 6 and iOS 17+. Each file includes its component, a Demo view, and
 | `swiftui/PhotoStack.swift` | `PhotoStackDemo()` | Tap to unfold; swipe to cycle the first three items. Replace the original procedural postcards with your photos. |
 | `swiftui/HoldToConfirm.swift` | `HoldToConfirmDemo()` | Early release / pointer drift cancels; one callback per hold; accessible activation does not require holding. |
 | `swiftui/MiniPlayer.swift` | `MiniPlayerDemo()` | Expand/collapse and bind playback state. Presentation only: connect your own audio engine. |
-| `swiftui/ReactionPicker.swift` | `ReactionPickerDemo()` | Hold, drag, release to select; named accessibility actions for each option. Reserve space above the control. |
+| `swiftui/ReactionPicker.swift` | `ReactionPickerDemo()` | Hold, drag, release to select; tap to remove. Named accessibility actions for each option and removal. Reserve space above the control. |
 | `swiftui/SendButton.swift` | `SendButtonDemo()` | Async success/failure, retry, duplicate-submit guard, task cancellation. Demo includes a simulated failure switch. |
 | `swiftui/PullToSearch.swift` | `PullToSearchDemo()` | Pull or tap to reveal search; clear, cancel, empty results. Host owns filtering / network debounce. |
 
@@ -31,7 +31,7 @@ The first command type-checks all files with Swift 6 against the installed iOS S
 
 Compilation is not a substitute for testing VoiceOver, Dynamic Type, networking, or your production data. These are adaptable examples, not a dependency with a compatibility guarantee.
 
-Simulator spot checks covered photo expansion, player state changes, accessible confirmation/reaction actions, send failure/retry, search filtering/clear/cancel and empty results. Automated pointer dragging did not reliably generate touch gestures in the simulator: the pull gesture and hold/slide paths still need manual device testing. Accessibility alternatives were exercised, but a full VoiceOver audit was not performed.
+Simulator spot checks covered photo expansion, player state changes, accessible confirmation/reaction/removal actions, send failure/retry, search filtering/clear/cancel and empty results. Automated pointer dragging did not reliably generate touch gestures in the simulator: the pull gesture and hold/slide paths (including sustained-hold cancellation) still need manual device testing. Accessibility alternatives were exercised, but a full VoiceOver audit was not performed.
 
 ## Keep website downloads in sync
 

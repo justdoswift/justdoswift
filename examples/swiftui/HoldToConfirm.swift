@@ -12,6 +12,8 @@ struct HoldToConfirmButton: View {
     @State private var progress = 0.0
     @State private var complete = false
     @State private var cancelled = false
+    @State private var confirmedThisPress = false
+    @GestureState private var pressing = false
     @State private var holdTask: Task<Void, Never>?
 
     var body: some View {
@@ -32,8 +34,9 @@ struct HoldToConfirmButton: View {
         .scaleEffect(progress > 0 && !complete && !reduceMotion ? 0.97 : 1)
         .contentShape(Capsule())
         .gesture(DragGesture(minimumDistance: 0)
+            .updating($pressing) { _, pressing, _ in pressing = true }
             .onChanged { value in
-                guard !complete, !cancelled else { return }
+                guard !complete, !cancelled, !confirmedThisPress else { return }
                 if abs(value.translation.width) > 28 || abs(value.translation.height) > 28 {
                     cancelled = true
                     cancelHold()
@@ -43,8 +46,17 @@ struct HoldToConfirmButton: View {
             }
             .onEnded { _ in
                 cancelled = false
+                confirmedThisPress = false
                 if !complete { cancelHold() }
             })
+        .onChange(of: pressing) { _, active in
+            // GestureState also resets if the system cancels the gesture.
+            if !active {
+                cancelled = false
+                confirmedThisPress = false
+                if !complete { cancelHold() }
+            }
+        }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(complete ? "Archived" : title)
         .accessibilityHint("Activate to confirm without holding")
@@ -60,6 +72,7 @@ struct HoldToConfirmButton: View {
         .onDisappear {
             cancelHold()
             cancelled = false
+            confirmedThisPress = false
         }
     }
 
@@ -72,7 +85,11 @@ struct HoldToConfirmButton: View {
                 let elapsed = start.duration(to: clock.now).components
                 let seconds = Double(elapsed.seconds) + Double(elapsed.attoseconds) / 1e18
                 progress = min(seconds / safeDuration, 1)
-                if progress >= 1 { confirm(); return }
+                if progress >= 1 {
+                    confirmedThisPress = true
+                    confirm()
+                    return
+                }
                 do { try await Task.sleep(for: .milliseconds(16)) } catch { return }
             }
         }

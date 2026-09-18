@@ -7,8 +7,9 @@
     "fps": 30,
     "frames": 240,
     "duration": 8,
-    "bytes": 115535,
-    "sha256": "28ecc4fda22e84c5a792862848becc852f27b60d177f14b0632678434e09d91c",
+    "bytes": 90259,
+    "sha256": "9194653f89f19deea617b956dee2df6b4b6ed6174814156940254565847f1caf",
+    "loopSimilarity": 0.999817,
     "kind": "remotion-design-demonstration"
   },
   {
@@ -19,8 +20,9 @@
     "fps": 30,
     "frames": 240,
     "duration": 8,
-    "bytes": 190678,
-    "sha256": "b16f435ec0dc37a16251881b76735699e1879fd2a810c1ce7e74313a367f0412",
+    "bytes": 172451,
+    "sha256": "fdafc4e31b323fe8ceb8261616ff4985628cfcc982b27b1cbcef5019d440a54e",
+    "loopSimilarity": 0.999712,
     "kind": "remotion-design-demonstration"
   },
   {
@@ -31,8 +33,9 @@
     "fps": 30,
     "frames": 240,
     "duration": 8,
-    "bytes": 400401,
-    "sha256": "0a8b6d8c2fce72d0839143a7ca3e04eaf3c5eae48a8988913d157b855485f7cf",
+    "bytes": 349917,
+    "sha256": "c3aacb28b161726ebc360213d95a8b577d51609b7431eb137515baf5aa43e409",
+    "loopSimilarity": 0.999136,
     "kind": "remotion-design-demonstration"
   },
   {
@@ -43,8 +46,9 @@
     "fps": 30,
     "frames": 240,
     "duration": 8,
-    "bytes": 239814,
-    "sha256": "a73d1bbe25586783841cfcc8dd8914debf05acd9b634514ac87d3ea6f8cd1cbf",
+    "bytes": 323491,
+    "sha256": "8dedec5e32054ee4f4f3d6e2c46eb6024760e50a9e22ed75b32c0a30a7c8dac5",
+    "loopSimilarity": 0.999357,
     "kind": "remotion-design-demonstration"
   },
   {
@@ -55,8 +59,9 @@
     "fps": 30,
     "frames": 240,
     "duration": 8,
-    "bytes": 111805,
-    "sha256": "488ebcdc192b4624b77b9ca74f77ec191ae901a8c272d11cbde4d6753d6f29bb",
+    "bytes": 116888,
+    "sha256": "af6f7c82437d3fd5d6cf5b2a30a5b4c625a0b622e2f33c448c42b77321e06d1a",
+    "loopSimilarity": 0.999925,
     "kind": "remotion-design-demonstration"
   },
   {
@@ -67,8 +72,9 @@
     "fps": 30,
     "frames": 240,
     "duration": 8,
-    "bytes": 98457,
-    "sha256": "18882861050541ec82bfed8e2a5b0ff2a3c1f8fc7ef86fdf7b9f586bc12b64db",
+    "bytes": 84871,
+    "sha256": "f21ea62b9c731cc837c2b373cfc0bb3df0205cd3f080b4fb5c931fbe705d1909",
+    "loopSimilarity": 0.999797,
     "kind": "remotion-design-demonstration"
   }
 ]

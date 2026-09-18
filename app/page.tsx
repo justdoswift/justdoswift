@@ -16,7 +16,7 @@ export default function HomePage() {
           <header className="page-heading">
             <div className="heading-eyebrow"><span /> Built with SwiftUI</div>
             <h1>Small components.<br />Delightful interactions.</h1>
-            <p>精选 SwiftUI 组件与动效。发现一个细节，看看它如何运作，<br className="desktop-break" />再把源码带进你的下一个项目。</p>
+            <p>看动效，读源码。把喜欢的细节带进你的 SwiftUI 项目。</p>
           </header>
           <Suspense fallback={<div className="catalog-loading">Loading components…</div>}><ComponentGallery /></Suspense>
           <div className="collection-end"><span className="tiny-spark">✳</span><span>A small collection, always growing.</span><a href="https://github.com/justdoswift/justdoswift" target="_blank" rel="noreferrer">Follow on GitHub ↗</a></div>
