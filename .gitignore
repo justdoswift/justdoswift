@@ -2,6 +2,9 @@
 dist/
 .output/
 .astro
+.next/
+.vercel/
+*.tsbuildinfo
 
 # dependencies
 node_modules/
