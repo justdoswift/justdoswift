@@ -100,10 +100,10 @@ const ICON_VARIANTS: Record<CoreAnimation, Variants> = {
 };
 
 const VARIANT_CLASS: Record<ActionSwapButtonVariant, string> = {
-  primary: "bg-white text-black hover:bg-white/90",
-  secondary: "border border-white/10 bg-white/[0.07] text-white hover:bg-white/[0.11]",
-  outline: "border border-white/14 bg-transparent text-white hover:bg-white/[0.06]",
-  ghost: "text-white/60 hover:bg-white/[0.06] hover:text-white",
+  primary: "bg-[var(--foreground)] text-[var(--background)] hover:opacity-85",
+  secondary: "border border-[var(--border)] bg-[var(--background)] text-[var(--foreground)] hover:bg-[var(--surface)]",
+  outline: "border border-[var(--border)] bg-transparent text-[var(--foreground)] hover:bg-[var(--surface)]",
+  ghost: "text-[var(--muted)] hover:bg-[var(--surface-hover)] hover:text-[var(--foreground)]",
 };
 
 const SIZE_CLASS: Record<ActionSwapButtonSize, string> = {

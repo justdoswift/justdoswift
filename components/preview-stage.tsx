@@ -12,7 +12,8 @@ import {
   Share2,
   Sparkles,
 } from "lucide-react";
-import { useEffect, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useInView, useReducedMotion } from "motion/react";
 import type { SwiftComponent } from "@/lib/components";
 import { cn } from "@/lib/utils";
 
@@ -34,23 +35,26 @@ export function PreviewStage({
   const [dock, setDock] = useState(0);
   const [toastCount, setToastCount] = useState(3);
   const [sheetOpen, setSheetOpen] = useState(true);
+  const stage = useRef<HTMLDivElement>(null);
+  const inView = useInView(stage);
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
-    if (interactive) return;
+    if (interactive || reducedMotion || !inView || document.hidden) return;
     const interval = window.setInterval(() => {
       setActive((current) => !current);
       setDock((current) => (current + 1) % 3);
       setSheetOpen((current) => !current);
     }, 2300);
     return () => window.clearInterval(interval);
-  }, [interactive]);
+  }, [interactive, reducedMotion, inView]);
 
   const style = { "--accent": accent } as CSSProperties;
 
   if (video) {
     return (
-      <div className={cn("preview-stage video-preview", compact && "preview-stage-compact")} style={style}>
-        <video autoPlay muted loop playsInline preload="metadata" poster={poster} aria-label={`${title} preview`}>
+      <div ref={stage} className={cn("preview-stage video-preview", compact && "preview-stage-compact")} style={style}>
+        <video autoPlay={!reducedMotion} controls={interactive} muted loop playsInline preload="none" poster={poster} aria-label={`${title} preview`}>
           <source src={video} type="video/mp4" />
         </video>
       </div>
@@ -59,12 +63,11 @@ export function PreviewStage({
 
   return (
     <div
+      ref={stage}
       className={cn("preview-stage", `preview-${variant}`, compact && "preview-stage-compact")}
       style={style}
       aria-label={`${title} interactive preview`}
     >
-      <div className="stage-orb stage-orb-one" />
-      <div className="stage-orb stage-orb-two" />
 
       {variant === "swap" && (
         <button
@@ -88,6 +91,7 @@ export function PreviewStage({
                 key={label}
                 onClick={() => setActive(index === 1)}
                 className={selected ? "selected" : ""}
+                aria-pressed={selected}
                 tabIndex={interactive ? 0 : -1}
               >
                 {index === 0 ? <Sparkles /> : <Code2 />}
@@ -128,6 +132,7 @@ export function PreviewStage({
                 onClick={() => setDock(index)}
                 tabIndex={interactive ? 0 : -1}
                 aria-label={["Home", "Library", "Wallet"][index]}
+                aria-pressed={dock === index}
               >
                 <Icon />
                 {dock === index && <span>{["Home", "Library", "Wallet"][index]}</span>}
@@ -162,7 +167,7 @@ export function PreviewStage({
         <div className="sheet-phone">
           <div className="sheet-trigger-row">
             <div><span /><span /><span /></div>
-            <button type="button" onClick={() => setSheetOpen(true)} tabIndex={interactive ? 0 : -1}>
+            <button type="button" onClick={() => setSheetOpen(true)} tabIndex={interactive ? 0 : -1} aria-label="Open quick actions" aria-expanded={sheetOpen}>
               <Plus />
             </button>
           </div>

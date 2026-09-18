@@ -8,8 +8,9 @@ export const metadata: Metadata = {
     template: "%s — Just Do Swift",
   },
   description:
-    "Curated SwiftUI components and motion recipes with live previews, production-ready source code and implementation notes.",
+    "A growing collection of SwiftUI components and motion recipes with previews, Swift source code and implementation notes.",
   keywords: ["SwiftUI", "Swift", "iOS", "components", "animation", "Apple development"],
+  icons: { icon: "/favicon.svg" },
   openGraph: {
     title: "Just Do Swift — Beautiful SwiftUI components",
     description: "Preview the motion. Understand the details. Own the SwiftUI source.",
@@ -20,18 +21,18 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Just Do Swift",
-    description: "Beautiful SwiftUI components, ready to use.",
+    description: "SwiftUI components, interactive previews and source examples.",
   },
 };
 
 export const viewport: Viewport = {
-  colorScheme: "dark",
-  themeColor: "#070707",
+  colorScheme: "light dark",
+  themeColor: "#fdfdfd",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="zh-CN">
+    <html lang="zh-CN" data-scroll-behavior="smooth">
       <body>{children}</body>
     </html>
   );

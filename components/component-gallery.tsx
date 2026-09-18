@@ -1,122 +1,40 @@
 "use client";
 
 import Link from "next/link";
+import { useSearchParams, useRouter } from "next/navigation";
 import { ArrowUpRight, Search, X } from "lucide-react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import { PreviewStage } from "@/components/preview-stage";
 import { categories, swiftComponents } from "@/lib/components";
 
 export function ComponentGallery() {
   const [query, setQuery] = useState("");
-  const [category, setCategory] = useState<(typeof categories)[number]>("All");
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    function handleShortcut(event: KeyboardEvent) {
-      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
-        event.preventDefault();
-        inputRef.current?.focus();
-      }
-    }
-    window.addEventListener("keydown", handleShortcut);
-    return () => window.removeEventListener("keydown", handleShortcut);
-  }, []);
-
-  const filtered = useMemo(() => {
-    const normalized = query.trim().toLowerCase();
-    return swiftComponents.filter((component) => {
-      const matchesCategory = category === "All" || component.category === category;
-      const matchesSearch =
-        !normalized ||
-        `${component.title} ${component.description} ${component.category}`.toLowerCase().includes(normalized);
-      return matchesCategory && matchesSearch;
-    });
-  }, [category, query]);
+  const params = useSearchParams();
+  const router = useRouter();
+  const candidate = params.get("category");
+  const category = categories.find((item) => item === candidate) ?? "All";
+  const filtered = useMemo(() => swiftComponents.filter((component) => (category === "All" || component.category === category) && `${component.title} ${component.description} ${component.category}`.toLowerCase().includes(query.trim().toLowerCase())), [category, query]);
 
   return (
-    <section className="library-section" id="library">
-      <div className="shell">
-        <div className="section-heading-row">
-          <div>
-            <span className="section-kicker">The library</span>
-            <h2>Built to feel native.</h2>
-          </div>
-          <p>每一个组件都包含可复现的交互、完整 SwiftUI 源码和实现说明。</p>
+    <section className="library-section" id="library" aria-label="Browse components">
+      <div className="library-toolbar">
+        <div className="category-tabs" aria-label="Filter by category">
+          {categories.map((item) => <button type="button" aria-pressed={category === item} className={category === item ? "selected" : ""} onClick={() => router.replace(item === "All" ? "/" : `/?category=${item}`, { scroll: false })} key={item}>{item}{item === "All" && <span>{swiftComponents.length}</span>}</button>)}
         </div>
-
-        <div className="library-toolbar">
-          <div className="category-tabs" role="tablist" aria-label="Component categories">
-            {categories.map((item) => (
-              <button
-                type="button"
-                role="tab"
-                aria-selected={category === item}
-                className={category === item ? "selected" : ""}
-                onClick={() => setCategory(item)}
-                key={item}
-              >
-                {item}
-              </button>
-            ))}
-          </div>
-          <label className="library-search">
-            <Search />
-            <input
-              ref={inputRef}
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-              placeholder="Search components"
-              aria-label="Search components"
-            />
-            {query ? (
-              <button type="button" onClick={() => setQuery("")} aria-label="Clear search">
-                <X />
-              </button>
-            ) : (
-              <kbd>⌘K</kbd>
-            )}
-          </label>
-        </div>
-
-        {filtered.length ? (
-          <div className="component-grid">
-            {filtered.map((component, index) => (
-              <article className="component-card" key={component.slug} style={{ "--delay": `${index * 45}ms` } as React.CSSProperties}>
-                <Link
-                  href={`/components/${component.slug}`}
-                  className="card-hit"
-                  aria-label={`View ${component.title}`}
-                />
-                <div className="card-preview" aria-hidden>
-                  <PreviewStage {...component} compact />
-                  <span className="card-access">{component.access}</span>
-                </div>
-                <div className="card-copy">
-                  <div>
-                    <span>{component.category}</span>
-                    <h3>{component.title}</h3>
-                  </div>
-                  <ArrowUpRight className="card-arrow" />
-                  <p>{component.description}</p>
-                  <div className="card-meta">
-                    <span>{component.ios}</span>
-                    <span>{component.swift}</span>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        ) : (
-          <div className="empty-state">
-            <Search />
-            <h3>No components found</h3>
-            <p>试试别的关键词，或者切换到 All。</p>
-            <button type="button" onClick={() => { setQuery(""); setCategory("All"); }}>
-              Reset filters
-            </button>
-          </div>
-        )}
+        <div className="library-search"><Search /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Filter…" aria-label="Filter components" />{query && <button type="button" onClick={() => setQuery("")} aria-label="Clear filter"><X /></button>}</div>
       </div>
+      <p className="result-count" aria-live="polite">{filtered.length} {filtered.length === 1 ? "component" : "components"}</p>
+      {filtered.length ? (
+        <div className="component-grid">
+          {filtered.map((component) => (
+            <article className="component-card" key={component.slug}>
+              <Link href={`/components/${component.slug}`} className="card-hit" aria-label={`View ${component.title}`} />
+              <div className="card-preview" aria-hidden="true"><PreviewStage {...component} compact /><span className="preview-type">{component.video ? "MP4" : "Preview"}</span><span className="card-open"><ArrowUpRight /></span></div>
+              <div className="card-copy"><div className="card-title-row"><h2>{component.title}</h2><span>{component.ios}</span></div><p>{component.description}</p><div className="card-category">{component.category}<span>SwiftUI</span></div></div>
+            </article>
+          ))}
+        </div>
+      ) : <div className="empty-state"><Search /><h2>No components found</h2><p>试试其他关键词，或查看全部组件。</p><button className="pill-button" type="button" onClick={() => { setQuery(""); router.replace("/", { scroll: false }); }}>Clear filters</button></div>}
     </section>
   );
 }
