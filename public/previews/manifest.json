@@ -1,0 +1,74 @@
+[
+  {
+    "id": "HoldToConfirm",
+    "slug": "hold-to-confirm",
+    "width": 1080,
+    "height": 1080,
+    "fps": 30,
+    "frames": 240,
+    "duration": 8,
+    "bytes": 115535,
+    "sha256": "28ecc4fda22e84c5a792862848becc852f27b60d177f14b0632678434e09d91c",
+    "kind": "remotion-design-demonstration"
+  },
+  {
+    "id": "MiniPlayer",
+    "slug": "mini-player",
+    "width": 1080,
+    "height": 1080,
+    "fps": 30,
+    "frames": 240,
+    "duration": 8,
+    "bytes": 190678,
+    "sha256": "b16f435ec0dc37a16251881b76735699e1879fd2a810c1ce7e74313a367f0412",
+    "kind": "remotion-design-demonstration"
+  },
+  {
+    "id": "PhotoStack",
+    "slug": "photo-stack",
+    "width": 1080,
+    "height": 1080,
+    "fps": 30,
+    "frames": 240,
+    "duration": 8,
+    "bytes": 400401,
+    "sha256": "0a8b6d8c2fce72d0839143a7ca3e04eaf3c5eae48a8988913d157b855485f7cf",
+    "kind": "remotion-design-demonstration"
+  },
+  {
+    "id": "PullToSearch",
+    "slug": "pull-to-search",
+    "width": 1080,
+    "height": 1080,
+    "fps": 30,
+    "frames": 240,
+    "duration": 8,
+    "bytes": 239814,
+    "sha256": "a73d1bbe25586783841cfcc8dd8914debf05acd9b634514ac87d3ea6f8cd1cbf",
+    "kind": "remotion-design-demonstration"
+  },
+  {
+    "id": "ReactionPicker",
+    "slug": "reaction-picker",
+    "width": 1080,
+    "height": 1080,
+    "fps": 30,
+    "frames": 240,
+    "duration": 8,
+    "bytes": 111805,
+    "sha256": "488ebcdc192b4624b77b9ca74f77ec191ae901a8c272d11cbde4d6753d6f29bb",
+    "kind": "remotion-design-demonstration"
+  },
+  {
+    "id": "SendButton",
+    "slug": "send-button",
+    "width": 1080,
+    "height": 1080,
+    "fps": 30,
+    "frames": 240,
+    "duration": 8,
+    "bytes": 98457,
+    "sha256": "18882861050541ec82bfed8e2a5b0ff2a3c1f8fc7ef86fdf7b9f586bc12b64db",
+    "kind": "remotion-design-demonstration"
+  }
+]

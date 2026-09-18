@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "tsc --noEmit"
+    "lint": "node scripts/sync-swift.mjs --check && tsc --noEmit",
+    "sync:swift": "node scripts/sync-swift.mjs",
+    "check:swift": "zsh scripts/check-swift.sh",
+    "videos:render": "npm --prefix videos run render:all"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.3.3",

@@ -36,27 +36,42 @@ export function PreviewStage({
   const [toastCount, setToastCount] = useState(3);
   const [sheetOpen, setSheetOpen] = useState(true);
   const stage = useRef<HTMLDivElement>(null);
+  const media = useRef<HTMLVideoElement>(null);
+  const [mediaFailed, setMediaFailed] = useState(false);
   const inView = useInView(stage);
   const reducedMotion = useReducedMotion();
 
   useEffect(() => {
-    if (interactive || reducedMotion || !inView || document.hidden) return;
+    if (!video) return;
+    function updatePlayback() {
+      if (!media.current) return;
+      if (!inView || document.hidden || reducedMotion) media.current.pause();
+      else void media.current.play().catch(() => { /* Playback controls remain available. */ });
+    }
+    updatePlayback();
+    document.addEventListener("visibilitychange", updatePlayback);
+    return () => document.removeEventListener("visibilitychange", updatePlayback);
+  }, [inView, reducedMotion, video]);
+
+  useEffect(() => {
+    if (video || interactive || reducedMotion || !inView || document.hidden) return;
     const interval = window.setInterval(() => {
       setActive((current) => !current);
       setDock((current) => (current + 1) % 3);
       setSheetOpen((current) => !current);
     }, 2300);
     return () => window.clearInterval(interval);
-  }, [interactive, reducedMotion, inView]);
+  }, [video, interactive, reducedMotion, inView]);
 
   const style = { "--accent": accent } as CSSProperties;
 
   if (video) {
     return (
       <div ref={stage} className={cn("preview-stage video-preview", compact && "preview-stage-compact")} style={style}>
-        <video autoPlay={!reducedMotion} controls={interactive} muted loop playsInline preload="none" poster={poster} aria-label={`${title} preview`}>
+        <video ref={media} autoPlay={!reducedMotion && inView} controls={interactive} muted loop playsInline preload={interactive ? "metadata" : "none"} poster={poster} aria-label={`${title} preview`} onError={() => setMediaFailed(true)}>
           <source src={video} type="video/mp4" />
         </video>
+        {mediaFailed && interactive && <p className="video-error">视频暂时无法播放。可下载 MP4 后查看，源码仍可正常使用。</p>}
       </div>
     );
   }

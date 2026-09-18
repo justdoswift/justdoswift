@@ -29,7 +29,7 @@ export function ComponentGallery() {
           {filtered.map((component) => (
             <article className="component-card" key={component.slug}>
               <Link href={`/components/${component.slug}`} className="card-hit" aria-label={`View ${component.title}`} />
-              <div className="card-preview" aria-hidden="true"><PreviewStage {...component} compact /><span className="preview-type">{component.video ? "MP4" : "Preview"}</span><span className="card-open"><ArrowUpRight /></span></div>
+              <div className={`card-preview${component.video ? " card-preview-video" : ""}`} aria-hidden="true"><PreviewStage {...component} compact /><span className="preview-type">{component.videoKind === "remotion" ? "Remotion · 8s" : component.video ? "MP4" : "Preview"}</span><span className="card-open"><ArrowUpRight /></span></div>
               <div className="card-copy"><div className="card-title-row"><h2>{component.title}</h2><span>{component.ios}</span></div><p>{component.description}</p><div className="card-category">{component.category}<span>SwiftUI</span></div></div>
             </article>
           ))}

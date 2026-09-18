@@ -200,7 +200,11 @@ kbd { font-family: inherit; font-size: 10px; line-height: 1; border: 1px solid v
 .sheet-actions { display: grid; gap: 9px; margin-top: 12px; }
 .sheet-actions span { display: flex; align-items: center; gap: 8px; font-size: 9px; color: var(--demo-muted); }
 .sheet-actions svg { width: 11px; height: 11px; }
-.video-preview video { display: block; width: 100%; height: 100%; object-fit: contain; }
+.video-preview { display: block; }
+.video-preview video { display: block; width: 100%; height: 100%; min-width: 0; min-height: 0; object-fit: contain; }
+.component-card .card-preview-video { height: auto; aspect-ratio: 1; }
+.card-preview-video .preview-type { top: auto; bottom: 12px; background: #ffffffd9; border-radius: 20px; padding: 4px 7px; color: #727272; }
+.video-error { position: absolute; left: 16px; right: 16px; bottom: 48px; padding: 10px; background: var(--background); color: var(--muted); font-size: 12px; }
 
 /* Detail pages: preview first, documentation immediately below. */
 .detail-heading { margin: 22px 0 42px; position: relative; }
@@ -221,6 +225,12 @@ kbd { font-family: inherit; font-size: 10px; line-height: 1; border: 1px solid v
 .workbench-body { min-width: 0; }
 .workbench-preview { height: 380px; position: relative; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
 .workbench-preview .preview-stage { padding-bottom: 32px; }
+.workbench-preview.is-video { height: auto; }
+.workbench-preview.is-video .preview-stage { height: clamp(310px, 44vw, 540px); padding: 0; }
+.workbench-preview.is-video .preview-caption { position: static; background: var(--background); gap: 12px; flex-wrap: wrap; border-top: 1px solid var(--line); }
+.preview-caption a { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); }
+.preview-caption a:hover { color: var(--foreground); }
+.source-verification { border-left: 2px solid #91ac96; padding-left: 12px; }
 .workbench-preview .demo-spatial-card { width: 250px; height: 160px; padding: 21px; }
 .workbench-preview .demo-spatial-card strong { font-size: 22px; }
 .workbench-preview .sheet-phone { height: 255px; width: 208px; margin: 20px 0 0; border-bottom: 1px solid var(--demo-border); border-radius: 22px; }

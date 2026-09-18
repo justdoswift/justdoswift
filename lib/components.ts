@@ -1,3 +1,5 @@
+import { craftedComponents } from "./crafted-components";
+
 export type ComponentCategory = "Motion" | "Controls" | "Navigation" | "Surfaces";
 
 export type SwiftComponent = {
@@ -10,16 +12,19 @@ export type SwiftComponent = {
   ios: string;
   swift: string;
   accent: string;
-  variant: "swap" | "toggle" | "card" | "dock" | "toast" | "sheet";
+  variant: "swap" | "toggle" | "card" | "dock" | "toast" | "sheet" | "video";
   access: "Free" | "Pro";
   featured?: boolean;
   source: string;
   usage: string;
   video?: string;
   poster?: string;
+  videoKind?: "remotion" | "swiftui";
+  demo?: string;
 };
 
 export const swiftComponents: SwiftComponent[] = [
+  ...craftedComponents,
   {
     slug: "action-swap",
     title: "Action Swap",

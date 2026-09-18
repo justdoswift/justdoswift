@@ -39,7 +39,7 @@ export function ComponentWorkbench({ component }: { component: SwiftComponent })
         </div>
       </div>
       <div className="workbench-body" id="workbench-panel" role="tabpanel" aria-labelledby={`workbench-tab-${tab}`} tabIndex={0}>
-        {tab === "Preview" ? <div className="workbench-preview" data-preview-theme={dark ? "dark" : "light"} key={previewKey}><PreviewStage {...component} interactive /><div className="preview-caption"><span>{component.video ? "SwiftUI recording" : "Interactive web preview"}</span><span>Try it out <span aria-hidden="true">↗</span></span></div></div> : <CodeBlock code={tab === "Usage" ? component.usage : component.source} label={tab === "Usage" ? "Example.swift" : filename} />}
+        {tab === "Preview" ? <div className={`workbench-preview${component.video ? " is-video" : ""}`} data-preview-theme={dark ? "dark" : "light"} key={previewKey}><PreviewStage {...component} interactive /><div className="preview-caption"><span>{component.video ? (component.videoKind === "remotion" ? "Remotion demo · not a native recording" : component.videoKind === "swiftui" ? "SwiftUI recording" : "Video preview") : "Interactive web preview"}</span>{component.video ? <a href={component.video} download={`${component.slug}.mp4`}>Download MP4 <Download size={11}/></a> : <span>Try it out <span aria-hidden="true">↗</span></span>}</div></div> : <CodeBlock code={tab === "Usage" ? component.usage : component.source} label={tab === "Usage" ? "Example.swift" : filename} />}
       </div>
     </section>
   );
