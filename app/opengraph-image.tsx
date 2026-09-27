@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Just Do Swift — Beautiful SwiftUI components";
+export const alt = "Just Do Swift — Native GPUI components";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -38,7 +38,7 @@ export default function OpenGraphImage() {
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ color: "#e77749", fontSize: 18, marginBottom: 24 }}>
-            Built with SwiftUI
+            Built with GPUI · Rust
           </div>
           <div style={{ display: "flex", flexDirection: "column", fontSize: 76, lineHeight: 1.08, letterSpacing: -4, fontWeight: 700 }}>
             <span>Small components.</span>

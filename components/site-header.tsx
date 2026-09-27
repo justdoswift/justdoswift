@@ -6,7 +6,8 @@ import { ArrowRight, Github, Menu, Moon, Search, Sun, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { BrandMark } from "@/components/brand-mark";
 import { LibraryNavigation } from "@/components/library-sidebar";
-import { swiftComponents } from "@/lib/components";
+import { Button } from "@/components/ui/button";
+import { gpuiComponents } from "@/lib/gpui-components";
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -19,7 +20,7 @@ export function SiteHeader() {
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState(0);
   const [dark, setDark] = useState(false);
-  const results = swiftComponents.filter((item) => `${item.title} ${item.description} ${item.category}`.toLowerCase().includes(query.toLowerCase()));
+  const results = gpuiComponents.filter((item) => `${item.title} ${item.description} ${item.category}`.toLowerCase().includes(query.toLowerCase()));
 
   useEffect(() => {
     try {
@@ -64,7 +65,8 @@ export function SiteHeader() {
     setSearchOpen(false);
     setQuery("");
     setSelected(0);
-    router.push(`/components/${slug}`);
+    const component = gpuiComponents.find((item) => item.slug === slug);
+    if (component) router.push(component.href);
   }
 
   return (
@@ -73,19 +75,22 @@ export function SiteHeader() {
       <header className="site-header">
         <Link href="/" className="header-brand" aria-label="Just Do Swift home"><BrandMark /></Link>
         <nav className="desktop-nav" aria-label="Primary navigation">
-          <Link href="/" className={pathname !== "/guide" ? "current" : ""}>Components</Link>
-          <Link href="/?category=Motion">Motion</Link>
+          <Link href="/" className={pathname === "/" || pathname.startsWith("/gpui") ? "current" : ""}>Components</Link>
           <Link href="/guide" className={pathname === "/guide" ? "current" : ""}>Guide</Link>
         </nav>
         <div className="header-actions">
-          <button ref={trigger} className="search-trigger" type="button" onClick={() => { setSearchOpen(true); setSelected(0); }} aria-label="Search components"><Search /><span>Search</span><kbd>⌘ K</kbd></button>
-          <button className="icon-button" type="button" onClick={toggleTheme} aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}>{dark ? <Sun /> : <Moon />}</button>
-          <a className="icon-button github-action" href="https://github.com/justdoswift/justdoswift" target="_blank" rel="noreferrer" aria-label="GitHub repository"><Github /></a>
-          <Link className="header-cta" href="/guide">Get started <ArrowRight /></Link>
-          <button className="icon-button menu-trigger" type="button" onClick={() => setMenuOpen((open) => !open)} aria-expanded={menuOpen} aria-controls="mobile-navigation" aria-label={menuOpen ? "Close navigation" : "Open navigation"}>{menuOpen ? <X /> : <Menu />}</button>
+          <Button ref={trigger} variant="outline" className="search-trigger h-9 w-[170px] justify-start gap-2 rounded-full px-3 text-xs font-normal text-muted-foreground shadow-none max-[800px]:w-9 max-[800px]:justify-center max-[800px]:px-0" onClick={() => { setSearchOpen(true); setSelected(0); }} aria-label="Search components"><Search className="size-3.5" /><span className="max-[800px]:hidden">Search</span><kbd className="ml-auto max-[800px]:hidden">⌘ K</kbd></Button>
+          <Button variant="outline" size="icon" className="size-9 rounded-full" onClick={toggleTheme} aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}>{dark ? <Sun /> : <Moon />}</Button>
+          <Button variant="outline" size="icon" className="github-action size-9 rounded-full" asChild>
+            <a href="https://github.com/justdoswift/justdoswift" target="_blank" rel="noreferrer" aria-label="GitHub repository"><Github /></a>
+          </Button>
+          <Button className="header-cta rounded-full" size="sm" asChild>
+            <Link href="/guide">Get started <ArrowRight /></Link>
+          </Button>
+          <Button variant="outline" size="icon" className="menu-trigger size-9 rounded-full" onClick={() => setMenuOpen((open) => !open)} aria-expanded={menuOpen} aria-controls="mobile-navigation" aria-label={menuOpen ? "Close navigation" : "Open navigation"}>{menuOpen ? <X /> : <Menu />}</Button>
         </div>
       </header>
-      {menuOpen && <div className="mobile-navigation" id="mobile-navigation" onClick={(event) => { if ((event.target as HTMLElement).closest("a")) setMenuOpen(false); }}><LibraryNavigation active={pathname === "/" ? "home" : pathname.split("/").pop()} /></div>}
+      {menuOpen && <div className="mobile-navigation" id="mobile-navigation" onClick={(event) => { if ((event.target as HTMLElement).closest("a")) setMenuOpen(false); }}><LibraryNavigation active={pathname === "/" ? "home" : pathname.startsWith("/gpui/") ? `gpui-${pathname.split("/").pop()}` : pathname.split("/").pop()} /></div>}
       <dialog className="search-dialog" ref={dialog} aria-label="Search components" onCancel={() => setSearchOpen(false)} onClose={() => { setSearchOpen(false); trigger.current?.focus(); }} onClick={(event) => { if (event.target === event.currentTarget) setSearchOpen(false); }}>
         <div className="search-dialog-inner">
           <div className="search-dialog-input"><Search /><input ref={searchInput} placeholder="Find a component…" aria-label="Find a component" role="combobox" aria-expanded="true" aria-controls="search-results" aria-activedescendant={results[selected] ? `result-${results[selected].slug}` : undefined} value={query} onChange={(event) => { setQuery(event.target.value); setSelected(0); }} onKeyDown={(event) => {
@@ -97,7 +102,7 @@ export function SiteHeader() {
           }} /><button type="button" onClick={() => setSearchOpen(false)} aria-label="Close search"><kbd>esc</kbd></button></div>
           <div className="search-results" id="search-results" role="listbox" aria-label="Matching components">
             <span className="search-caption">Components</span>
-            {results.map((item, index) => <button type="button" id={`result-${item.slug}`} role="option" aria-selected={selected === index} className={selected === index ? "selected" : ""} key={item.slug} onMouseEnter={() => setSelected(index)} onClick={() => choose(item.slug)}><span><strong>{item.title}</strong><small>{item.category} · {item.ios}</small></span><ArrowRight /></button>)}
+            {results.map((item, index) => <button type="button" id={`result-${item.slug}`} role="option" aria-selected={selected === index} className={selected === index ? "selected" : ""} key={item.slug} onMouseEnter={() => setSelected(index)} onClick={() => choose(item.slug)}><span><strong>{item.title}</strong><small>GPUI · {item.platform}</small></span><ArrowRight /></button>)}
             {!results.length && <p className="search-empty">没有找到组件，换个关键词试试。</p>}
           </div>
           <div className="search-dialog-footer"><span>↑ ↓ to navigate</span><span>↵ to open</span><span>esc to close</span></div>

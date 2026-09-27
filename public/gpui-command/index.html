@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Button · GPUI</title>
+  <script>
+    document.documentElement.dataset.theme = new URLSearchParams(location.search).get('theme') === 'dark' ? 'dark' : 'light';
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    :root { color-scheme: light; --surface: #f8f8f8; --foreground: #222; --muted: #727272; --line: #dedede; --accent: #0285f7; }
+    :root[data-theme="dark"] { color-scheme: dark; --surface: #202020; --foreground: #eee; --muted: #a0a0a0; --line: #414141; --accent: #65b2ff; }
+    html, body { margin: 0; width: 100%; height: 100%; background: var(--surface); color: var(--foreground); font: 14px system-ui; }
+    body { overflow: hidden; }
+    body > canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+    #status { position: fixed; inset: 0; z-index: 10; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 12px; padding: 32px; background: var(--surface); text-align: center; transition: opacity 160ms ease-out; }
+    #status[data-state="ready"] { opacity: 0; pointer-events: none; }
+    .preview-spinner { width: 30px; height: 30px; overflow: visible; animation: preview-spin 1s linear infinite; }
+    .preview-spinner-track { fill: none; stroke: var(--line); stroke-width: 2; }
+    .preview-spinner-arc { fill: none; stroke: var(--accent); stroke-width: 2; stroke-linecap: round; stroke-dasharray: 22 60; }
+    #status strong { font-size: 14px; font-weight: 500; }
+    #status p { max-width: 430px; margin: 0; line-height: 1.7; color: var(--muted); }
+    #status button { margin-top: 4px; background: var(--foreground); color: var(--surface); border: 0; padding: 10px 18px; border-radius: 999px; font: inherit; font-size: 12px; cursor: pointer; }
+    #status button:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    @keyframes preview-spin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) { .preview-spinner { animation: none; } #status { transition: none; } }
+  </style>
+</head>
+<body>
+  <div id="status" role="status" aria-label="Loading preview" aria-busy="true">
+    <svg class="preview-spinner" viewBox="0 0 30 30" aria-hidden="true">
+      <circle class="preview-spinner-track" cx="15" cy="15" r="13" />
+      <circle class="preview-spinner-arc" cx="15" cy="15" r="13" transform="rotate(-90 15 15)" />
+    </svg>
+  </div>
+  <script type="module" src="./loader.js"></script>
+</body>
+</html>

@@ -4,16 +4,16 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://justdoswift.com"),
   title: {
-    default: "Just Do Swift — Beautiful SwiftUI components",
+    default: "Just Do Swift — Native GPUI components",
     template: "%s — Just Do Swift",
   },
   description:
-    "A growing collection of SwiftUI components and motion recipes with previews, Swift source code and implementation notes.",
-  keywords: ["SwiftUI", "Swift", "iOS", "components", "animation", "Apple development"],
+    "Native GPUI components for desktop apps. Explore Accordion, try live WebAssembly previews, and use the same Rust source in your app.",
+  keywords: ["GPUI", "Rust", "desktop", "components", "animation", "WebAssembly"],
   icons: { icon: "/favicon.svg" },
   openGraph: {
-    title: "Just Do Swift — Beautiful SwiftUI components",
-    description: "Preview the motion. Understand the details. Own the SwiftUI source.",
+    title: "Just Do Swift — Native GPUI components",
+    description: "Desktop components. Live previews. The same Rust source.",
     url: "https://justdoswift.com",
     siteName: "Just Do Swift",
     type: "website",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Just Do Swift",
-    description: "SwiftUI components, interactive previews and source examples.",
+    description: "Native GPUI components, live previews and Rust source examples.",
   },
 };
 

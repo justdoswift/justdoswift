@@ -1,0 +1,15 @@
+node_modules/
+.next/
+.git/
+.vscode/
+.DS_Store
+.env
+.env.*
+*.tsbuildinfo
+*.log
+dist/
+.output/
+.astro/
+examples/gpui-command/target/
+videos/
+public/previews/
