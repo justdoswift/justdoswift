@@ -76,6 +76,7 @@ try {
     else if (demo === 'accordion') wasm.run_accordion(params.get('variant') || 'default', dark, reducedMotion);
     else if (demo === 'tabs') wasm.run_tabs(params.get('variant') || 'pill', dark, reducedMotion);
     else if (demo === 'button') wasm.run_button(params.get('variant') || 'variants', dark, reducedMotion);
+    else if (demo === 'button-group') wasm.run_button_group(params.get('variant') || 'basic', dark, reducedMotion);
     else wasm.run_metallic(params.get('variant') || 'metallic', dark, reducedMotion);
   });
   status.setAttribute('aria-busy', 'false');

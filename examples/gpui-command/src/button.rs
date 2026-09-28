@@ -36,7 +36,11 @@ pub enum ButtonSize {
 pub enum ButtonIcon {
     ArrowUp,
     ArrowUpRight,
+    ChevronDown,
+    ChevronLeft,
+    ChevronRight,
     GitBranch,
+    Minus,
     Plus,
     /// Continuously rotating arc; frozen when reduced motion is on.
     Spinner,
@@ -71,6 +75,7 @@ pub struct Button {
     size: ButtonSize,
     pill: bool,
     join: ButtonJoin,
+    vjoin: Option<ButtonJoin>,
     disabled: bool,
     dark: bool,
     on_click: Option<Rc<dyn Fn(&ClickEvent, &mut Window, &mut App)>>,
@@ -88,6 +93,7 @@ impl Button {
             size: ButtonSize::Default,
             pill: false,
             join: ButtonJoin::Solo,
+            vjoin: None,
             disabled: false,
             dark: false,
             on_click: None,
@@ -121,9 +127,15 @@ impl Button {
         self.pill = pill;
         self
     }
-    /// Joined position inside a button group (squares the inner corners).
+    /// Joined position inside a horizontal button group (squares the inner
+    /// corners and overlaps the border).
     pub fn join(mut self, join: ButtonJoin) -> Self {
         self.join = join;
+        self
+    }
+    /// Joined position inside a vertical button group.
+    pub fn vjoin(mut self, join: ButtonJoin) -> Self {
+        self.vjoin = Some(join);
         self
     }
     pub fn disabled(mut self, disabled: bool) -> Self {
@@ -287,6 +299,25 @@ fn button_icon(icon: ButtonIcon, color: Hsla) -> AnyElement {
                     b.move_to(at(2.6, 6.));
                     b.line_to(at(9.4, 6.));
                 }
+                ButtonIcon::Minus => {
+                    b.move_to(at(2.6, 6.));
+                    b.line_to(at(9.4, 6.));
+                }
+                ButtonIcon::ChevronDown => {
+                    b.move_to(at(2.8, 4.4));
+                    b.line_to(at(6., 7.6));
+                    b.line_to(at(9.2, 4.4));
+                }
+                ButtonIcon::ChevronLeft => {
+                    b.move_to(at(7.6, 2.8));
+                    b.line_to(at(4.4, 6.));
+                    b.line_to(at(7.6, 9.2));
+                }
+                ButtonIcon::ChevronRight => {
+                    b.move_to(at(4.4, 2.8));
+                    b.line_to(at(7.6, 6.));
+                    b.line_to(at(4.4, 9.2));
+                }
                 ButtonIcon::Spinner => return,
             }
             if let Ok(path) = b.build() {
@@ -375,8 +406,26 @@ impl RenderOnce for Button {
             .focus_visible(|style| style.border_color(ink))
             .styles(|styles| styles.disabled(|style| style.opacity(0.45)));
 
-        // Corner grouping: square off the joined sides and overlap borders.
-        if self.join == ButtonJoin::Solo {
+        // Corner grouping, matching shadcn's approach: non-first children
+        // drop their leading border (`border-l-0`) so the previous button's
+        // trailing border is the shared seam — no negative margins needed.
+        if let Some(vjoin) = self.vjoin {
+            let (tl, tr, br, bl) = match vjoin {
+                ButtonJoin::Start => (radius, radius, px(0.), px(0.)),
+                ButtonJoin::Middle => (px(0.), px(0.), px(0.), px(0.)),
+                ButtonJoin::End => (px(0.), px(0.), radius, radius),
+                ButtonJoin::Solo => (radius, radius, radius, radius),
+            };
+            el = el
+                .rounded_tl(tl)
+                .rounded_tr(tr)
+                .rounded_br(br)
+                .rounded_bl(bl)
+                .when(
+                    vjoin == ButtonJoin::Middle || vjoin == ButtonJoin::End,
+                    |style| style.border_t_0(),
+                );
+        } else if self.join == ButtonJoin::Solo {
             el = el.rounded(radius);
         } else {
             let (tl, tr, br, bl) = match self.join {
@@ -392,7 +441,7 @@ impl RenderOnce for Button {
                 .rounded_bl(bl)
                 .when(
                     self.join == ButtonJoin::Middle || self.join == ButtonJoin::End,
-                    |style| style.ml(px(-1.)),
+                    |style| style.border_l_0(),
                 );
         }
 

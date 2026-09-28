@@ -231,6 +231,31 @@ request-animation-frame spinner that freezes under reduced motion.
 `.pill(true)` gives rounded-full; `.join(Start|Middle|End)` joins
 buttons into a group with collapsed borders.
 
+## Button Group
+
+`/gpui/button-group` previews the same native button group on desktop
+and WebAssembly, modeled on the
+[shadcn/ui Button Group](https://ui.shadcn.com/docs/components/aria/button-group)
+documentation.
+
+```sh
+cargo run --locked -- --button-group
+cargo run --locked -- --button-group orientation
+cargo run --locked -- --button-group sizes
+cargo run --locked -- --button-group nested
+cargo run --locked -- --button-group separator
+cargo run --locked -- --button-group split
+cargo run --locked -- --button-group input
+```
+
+`src/button_group.rs` provides a render-once `ButtonGroup` container
+(`.vertical(true)` stacks children), `group_separator(..)` — a 1px
+divider for same-surface buttons — and `group_text(..)` — a
+non-interactive label cell. Children opt into the merged look through
+`Button::join(..)` horizontally and `Button::vjoin(..)` vertically,
+which keep the outer corner radii and collapse shared borders by 1px.
+Nested groups keep the parent's `.gap(..)`.
+
 ## Tabs
 
 `motion_tabs.rs` runs the same native tab control on desktop and WebAssembly,

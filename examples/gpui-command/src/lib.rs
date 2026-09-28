@@ -10,6 +10,7 @@ pub mod badge;
 pub mod breadcrumb;
 pub mod bubble;
 pub mod button;
+pub mod button_group;
 pub mod button_metallic;
 pub mod motion_button;
 pub mod motion_tabs;
@@ -568,6 +569,19 @@ pub fn run_button(variant: String, dark: bool, reduced_motion: bool) {
     let handle = kit::platform::single_threaded_web().run_embedded(move |cx| {
         cx.set_reduce_motion(reduced_motion);
         button::setup(&variant, dark, cx);
+        announce_preview_after_first_frame(cx);
+    });
+    APPLICATION.with(|application| *application.borrow_mut() = Some(handle));
+}
+
+#[cfg(target_family = "wasm")]
+#[wasm_bindgen::prelude::wasm_bindgen]
+pub fn run_button_group(variant: String, dark: bool, reduced_motion: bool) {
+    console_error_panic_hook::set_once();
+    kit::platform::web_init();
+    let handle = kit::platform::single_threaded_web().run_embedded(move |cx| {
+        cx.set_reduce_motion(reduced_motion);
+        button_group::setup(&variant, dark, cx);
         announce_preview_after_first_frame(cx);
     });
     APPLICATION.with(|application| *application.borrow_mut() = Some(handle));

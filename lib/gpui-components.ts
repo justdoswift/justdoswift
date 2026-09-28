@@ -79,4 +79,12 @@ export const gpuiComponents = [
     category: "Actions",
     platform: "Desktop",
   },
+  {
+    slug: "button-group",
+    title: "Button Group",
+    href: "/gpui/button-group",
+    description: "把相关按钮合并成组：横纵排布、分隔线、文本格与 split 按钮。",
+    category: "Actions",
+    platform: "Desktop",
+  },
 ] as const;
