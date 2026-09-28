@@ -103,4 +103,20 @@ export const gpuiComponents = [
     category: "Layout",
     platform: "Desktop",
   },
+  {
+    slug: "carousel",
+    title: "Carousel",
+    href: "/gpui/carousel",
+    description: "Embla 风格的滑动轮播：动画轨道、首尾导航、loop 回绕、垂直模式与键盘控制。",
+    category: "Data Display",
+    platform: "Desktop",
+  },
+  {
+    slug: "chart",
+    title: "Chart",
+    href: "/gpui/chart",
+    description: "自绘图表：分组/堆叠柱状、折线、面积、环形，悬停 tooltip、legend 与明暗主题。",
+    category: "Data Display",
+    platform: "Desktop",
+  },
 ] as const;

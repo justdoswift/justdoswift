@@ -15,6 +15,8 @@ A desktop component library built with Rust and GPUI. Components are modeled on 
 - `/gpui/button-group`: Joined buttons, separators and split buttons.
 - `/gpui/calendar`: Single/range date picking, month-year dropdowns, presets, date-time composition and disabled dates.
 - `/gpui/card`: Header/content/footer containers with a spacing scale and edge-to-edge media.
+- `/gpui/carousel`: Embla-style slide carousels — animated track, prev/next controls, loop, vertical axis and arrow-key navigation.
+- `/gpui/chart`: Hand-painted charts — grouped/stacked bars, line, area and donut with hover tooltips, legends and theming.
 
 The homepage, navigation, search and sitemap use `lib/gpui-components.ts` as the published component list. Earlier component pages are no longer published; their implementation files remain in the repository.
 

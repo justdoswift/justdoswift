@@ -41,6 +41,12 @@ fn main() {
         justdo_command::motion_tabs::run_native(
             args.get(index + 1).map(String::as_str).unwrap_or("pill"),
         );
+    } else if let Some(index) = args.iter().position(|arg| arg == "--carousel") {
+        justdo_command::carousel::run_native(
+            args.get(index + 1).map(String::as_str).unwrap_or("basic"),
+        );
+    } else if let Some(index) = args.iter().position(|arg| arg == "--chart") {
+        justdo_command::chart::run_native(args.get(index + 1).map(String::as_str).unwrap_or("bar"));
     } else if let Some(index) = args.iter().position(|arg| arg == "--card") {
         justdo_command::card::run_native(
             args.get(index + 1).map(String::as_str).unwrap_or("basic"),

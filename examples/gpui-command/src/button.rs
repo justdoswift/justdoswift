@@ -34,6 +34,9 @@ pub enum ButtonSize {
 /// Optional inline icon (`data-icon="inline-start|end"`).
 #[derive(Clone, Copy, PartialEq, Eq, Debug)]
 pub enum ButtonIcon {
+    ArrowDown,
+    ArrowLeft,
+    ArrowRight,
     ArrowUp,
     ArrowUpRight,
     ChevronDown,
@@ -265,6 +268,27 @@ fn button_icon(icon: ButtonIcon, color: Hsla) -> AnyElement {
             let at = |x: f32, y: f32| o + point(pxk(x), pxk(y));
             let mut b = PathBuilder::stroke(px(1.3 * k.max(0.7)));
             match icon {
+                ButtonIcon::ArrowDown => {
+                    b.move_to(at(6., 2.));
+                    b.line_to(at(6., 10.));
+                    b.move_to(at(2.6, 6.6));
+                    b.line_to(at(6., 10.));
+                    b.line_to(at(9.4, 6.6));
+                }
+                ButtonIcon::ArrowLeft => {
+                    b.move_to(at(10., 6.));
+                    b.line_to(at(2., 6.));
+                    b.move_to(at(5.4, 2.6));
+                    b.line_to(at(2., 6.));
+                    b.line_to(at(5.4, 9.4));
+                }
+                ButtonIcon::ArrowRight => {
+                    b.move_to(at(2., 6.));
+                    b.line_to(at(10., 6.));
+                    b.move_to(at(6.6, 2.6));
+                    b.line_to(at(10., 6.));
+                    b.line_to(at(6.6, 9.4));
+                }
                 ButtonIcon::ArrowUp => {
                     b.move_to(at(6., 10.));
                     b.line_to(at(6., 2.));

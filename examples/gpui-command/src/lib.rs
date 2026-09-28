@@ -14,6 +14,8 @@ pub mod button_group;
 pub mod button_metallic;
 pub mod calendar;
 pub mod card;
+pub mod carousel;
+pub mod chart;
 
 pub mod motion_button;
 pub mod motion_tabs;
@@ -611,6 +613,32 @@ pub fn run_card(variant: String, dark: bool, reduced_motion: bool) {
     let handle = kit::platform::single_threaded_web().run_embedded(move |cx| {
         cx.set_reduce_motion(reduced_motion);
         card::setup(&variant, dark, cx);
+        announce_preview_after_first_frame(cx);
+    });
+    APPLICATION.with(|application| *application.borrow_mut() = Some(handle));
+}
+
+#[cfg(target_family = "wasm")]
+#[wasm_bindgen::prelude::wasm_bindgen]
+pub fn run_carousel(variant: String, dark: bool, reduced_motion: bool) {
+    console_error_panic_hook::set_once();
+    kit::platform::web_init();
+    let handle = kit::platform::single_threaded_web().run_embedded(move |cx| {
+        cx.set_reduce_motion(reduced_motion);
+        carousel::setup(&variant, dark, cx);
+        announce_preview_after_first_frame(cx);
+    });
+    APPLICATION.with(|application| *application.borrow_mut() = Some(handle));
+}
+
+#[cfg(target_family = "wasm")]
+#[wasm_bindgen::prelude::wasm_bindgen]
+pub fn run_chart(variant: String, dark: bool, reduced_motion: bool) {
+    console_error_panic_hook::set_once();
+    kit::platform::web_init();
+    let handle = kit::platform::single_threaded_web().run_embedded(move |cx| {
+        cx.set_reduce_motion(reduced_motion);
+        chart::setup(&variant, dark, cx);
         announce_preview_after_first_frame(cx);
     });
     APPLICATION.with(|application| *application.borrow_mut() = Some(handle));

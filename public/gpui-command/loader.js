@@ -79,6 +79,8 @@ try {
     else if (demo === 'button-group') wasm.run_button_group(params.get('variant') || 'basic', dark, reducedMotion);
     else if (demo === 'calendar') wasm.run_calendar(params.get('variant') || 'basic', dark, reducedMotion);
     else if (demo === 'card') wasm.run_card(params.get('variant') || 'basic', dark, reducedMotion);
+    else if (demo === 'carousel') wasm.run_carousel(params.get('variant') || 'basic', dark, reducedMotion);
+    else if (demo === 'chart') wasm.run_chart(params.get('variant') || 'bar', dark, reducedMotion);
     else wasm.run_metallic(params.get('variant') || 'metallic', dark, reducedMotion);
   });
   status.setAttribute('aria-busy', 'false');
