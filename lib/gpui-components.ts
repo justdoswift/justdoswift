@@ -87,4 +87,20 @@ export const gpuiComponents = [
     category: "Actions",
     platform: "Desktop",
   },
+  {
+    slug: "calendar",
+    title: "Calendar",
+    href: "/gpui/calendar",
+    description: "单日期或范围选择日历：双月视图、月/年下拉、预设、日期时间组合与禁用日期。",
+    category: "Date & Time",
+    platform: "Desktop",
+  },
+  {
+    slug: "card",
+    title: "Card",
+    href: "/gpui/card",
+    description: "卡片容器：header/content/footer 分区、间距缩放、贴边媒体与分隔线。",
+    category: "Layout",
+    platform: "Desktop",
+  },
 ] as const;

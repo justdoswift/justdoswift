@@ -77,6 +77,8 @@ try {
     else if (demo === 'tabs') wasm.run_tabs(params.get('variant') || 'pill', dark, reducedMotion);
     else if (demo === 'button') wasm.run_button(params.get('variant') || 'variants', dark, reducedMotion);
     else if (demo === 'button-group') wasm.run_button_group(params.get('variant') || 'basic', dark, reducedMotion);
+    else if (demo === 'calendar') wasm.run_calendar(params.get('variant') || 'basic', dark, reducedMotion);
+    else if (demo === 'card') wasm.run_card(params.get('variant') || 'basic', dark, reducedMotion);
     else wasm.run_metallic(params.get('variant') || 'metallic', dark, reducedMotion);
   });
   status.setAttribute('aria-busy', 'false');

@@ -23,7 +23,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-const usage = `use justdo_command::avatar::{Avatar, AvatarImage, AvatarSize};
+const usage = `use justdo_command::avatar::{Avatar, AvatarBadge, AvatarImage, AvatarSize};
 
 // A stack of overlapping avatars or a standalone one —
 // Avatar is a render-once element, drop it into any container.

@@ -1,8 +1,20 @@
 # Just Do Swift
 
-A desktop component library built with Rust and GPUI. The website currently publishes **Accordion** — a vertically stacked set of interactive headings that reveal sections of content, modeled on [shadcn/ui](https://ui.shadcn.com/docs/components/base/accordion) and built on the unstyled `gpui-base` primitives. Its live WebAssembly preview compiles the same Rust component used by the native example.
+A desktop component library built with Rust and GPUI. Components are modeled on [shadcn/ui](https://ui.shadcn.com) and built on the unstyled `gpui-base` primitives. Each live WebAssembly preview compiles the same Rust component used by the native example.
 
 - `/gpui/accordion`: Basic, Multiple, Disabled and Card accordions.
+- `/gpui/alert`: Destructive, success and informational alerts.
+- `/gpui/alert-dialog`: Modal confirmation dialogs.
+- `/gpui/aspect-ratio`: Fixed-ratio content containers.
+- `/gpui/attachment`: File and image attachment cards.
+- `/gpui/avatar`: Avatars with badge and stacked groups.
+- `/gpui/badge`: Status badges in six variants.
+- `/gpui/breadcrumb`: Hierarchical path navigation.
+- `/gpui/bubble`: Chat bubbles with reactions and grouping.
+- `/gpui/button`: Six variants, eight sizes, icons and spinners.
+- `/gpui/button-group`: Joined buttons, separators and split buttons.
+- `/gpui/calendar`: Single/range date picking, month-year dropdowns, presets, date-time composition and disabled dates.
+- `/gpui/card`: Header/content/footer containers with a spacing scale and edge-to-edge media.
 
 The homepage, navigation, search and sitemap use `lib/gpui-components.ts` as the published component list. Earlier component pages are no longer published; their implementation files remain in the repository.
 

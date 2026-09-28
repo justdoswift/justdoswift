@@ -39,6 +39,7 @@ pub enum ButtonIcon {
     ChevronDown,
     ChevronLeft,
     ChevronRight,
+    ChevronUp,
     GitBranch,
     Minus,
     Plus,
@@ -307,6 +308,11 @@ fn button_icon(icon: ButtonIcon, color: Hsla) -> AnyElement {
                     b.move_to(at(2.8, 4.4));
                     b.line_to(at(6., 7.6));
                     b.line_to(at(9.2, 4.4));
+                }
+                ButtonIcon::ChevronUp => {
+                    b.move_to(at(2.8, 7.6));
+                    b.line_to(at(6., 4.4));
+                    b.line_to(at(9.2, 7.6));
                 }
                 ButtonIcon::ChevronLeft => {
                     b.move_to(at(7.6, 2.8));

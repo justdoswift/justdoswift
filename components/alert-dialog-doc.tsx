@@ -24,13 +24,15 @@ import {
 } from "@/components/ui/table";
 
 const usage = `use justdo_command::alert_dialog::{AlertDialogSpec, alert_dialog};
+use justdo_command::button::Button;
 use gpui_kit::base::{AlertDialogTrigger, DialogHandle};
 
 // Keep the handle on your host view.
 struct Host { handle: DialogHandle }
 
 // In render: the trigger opens the dialog; the host renders it.
-AlertDialogTrigger::new(button("Show Dialog"))
+// (any IntoElement works as the trigger — our Button is one)
+AlertDialogTrigger::new(Button::new("open").label("Show Dialog"))
     .handle(self.handle.clone())
 
 // Plus the composed dialog itself (backdrop + popup + parts):

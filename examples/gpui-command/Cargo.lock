@@ -3015,6 +3015,7 @@ dependencies = [
  "console_error_panic_hook",
  "gpui-kit",
  "image",
+ "js-sys",
  "wasm-bindgen",
  "wasm-bindgen-futures",
  "web-sys",
