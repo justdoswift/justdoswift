@@ -612,7 +612,7 @@ impl Render for DatePicker {
                     *bounds_cell.borrow_mut() = *b;
                 }
             })
-            .child(div().flex().flex_col().w_full().child(field));
+            .child(div().flex().flex_col().w_full().items_center().child(field));
 
         if self.open {
             let _root = *self.root_bounds.borrow();

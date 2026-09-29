@@ -138,7 +138,7 @@ export function GpuiDatePickerWorkbench({ source }: { source: string }) {
           </div>
         </div>
         <TabsContent value="preview" className="workbench-body">
-          <div className="workbench-preview" data-preview-theme={dark ? "dark" : "light"}>
+          <div className="workbench-preview is-date-picker" data-preview-theme={dark ? "dark" : "light"}>
             <div className="preview-stage">
               <iframe
                 key={`${variant}-${dark}-${replay}`}
