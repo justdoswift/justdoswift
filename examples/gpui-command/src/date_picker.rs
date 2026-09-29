@@ -612,7 +612,15 @@ impl Render for DatePicker {
                     *bounds_cell.borrow_mut() = *b;
                 }
             })
-            .child(div().flex().flex_col().w_full().items_center().child(field));
+            .child(
+                div()
+                    .flex()
+                    .flex_col()
+                    .size_full()
+                    .items_center()
+                    .justify_center()
+                    .child(field),
+            );
 
         if self.open {
             let _root = *self.root_bounds.borrow();
@@ -835,17 +843,15 @@ impl Render for DatePickerDemo {
             .p_6()
             .font_family(FONT)
             .bg(surface)
+            .child(self.picker.clone())
             .child(
                 div()
-                    .pt(px(60.))
-                    .w_full()
+                    .absolute()
+                    .bottom(px(14.))
+                    .left_0()
+                    .right_0()
                     .flex()
                     .justify_center()
-                    .child(self.picker.clone()),
-            )
-            .child(
-                div()
-                    .mt_4()
                     .h(px(18.))
                     .text_xs()
                     .text_color(muted)
