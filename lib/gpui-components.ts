@@ -167,4 +167,12 @@ export const gpuiComponents = [
     category: "Data Display",
     platform: "Desktop",
   },
+  {
+    slug: "date-picker",
+    title: "Date Picker",
+    href: "/gpui/date-picker",
+    description: "按钮 + 弹层日历的日期选择器：范围、月年下拉、键入日期、自然语言与时间组合。",
+    category: "Date & Time",
+    platform: "Desktop",
+  },
 ] as const;

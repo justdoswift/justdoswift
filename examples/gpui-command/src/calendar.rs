@@ -49,7 +49,7 @@ impl Date {
         Self::from_ordinal(self.ordinal() + days)
     }
     /// 0 = Sunday.
-    fn weekday(self) -> u32 {
+    pub(crate) fn weekday(self) -> u32 {
         ((self.ordinal() + 4).rem_euclid(7)) as u32
     }
     fn days_in_month(year: i32, month: u32) -> u32 {
@@ -61,7 +61,7 @@ impl Date {
             _ => 30,
         }
     }
-    fn month_name(month: u32) -> &'static str {
+    pub(crate) fn month_name(month: u32) -> &'static str {
         [
             "January",
             "February",
@@ -191,6 +191,16 @@ impl Calendar {
     pub fn dropdown(mut self, dropdown: bool) -> Self {
         self.dropdown = dropdown;
         self
+    }
+    /// Current mode (single or range) — used by the date picker wrapper.
+    pub(crate) fn mode_of(&self) -> CalendarMode {
+        self.mode
+    }
+    /// Programmatically set the single-mode selection.
+    pub fn set_selected(&mut self, date: Date, cx: &mut Context<Self>) {
+        self.selected = Some(date);
+        self.visible = (date.year, date.month);
+        cx.notify();
     }
 
     fn shift_month(&mut self, delta: i64) {

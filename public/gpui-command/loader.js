@@ -91,6 +91,7 @@ try {
     else if (demo === 'command') wasm.run_command(params.get('variant') || 'basic', dark, reducedMotion);
     else if (demo === 'context-menu') wasm.run_context_menu(params.get('variant') || 'basic', dark, reducedMotion);
     else if (demo === 'data-table') wasm.run_data_table(params.get('variant') || 'basic', dark, reducedMotion);
+    else if (demo === 'date-picker') wasm.run_date_picker(params.get('variant') || 'basic', dark, reducedMotion);
     else wasm.run_metallic(params.get('variant') || 'metallic', dark, reducedMotion);
   });
   status.setAttribute('aria-busy', 'false');

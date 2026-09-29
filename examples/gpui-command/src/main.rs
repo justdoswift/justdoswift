@@ -71,6 +71,10 @@ fn main() {
         justdo_command::data_table::run_native(
             args.get(index + 1).map(String::as_str).unwrap_or("basic"),
         );
+    } else if let Some(index) = args.iter().position(|arg| arg == "--date-picker") {
+        justdo_command::date_picker::run_native(
+            args.get(index + 1).map(String::as_str).unwrap_or("basic"),
+        );
     } else if let Some(index) = args.iter().position(|arg| arg == "--card") {
         justdo_command::card::run_native(
             args.get(index + 1).map(String::as_str).unwrap_or("basic"),
