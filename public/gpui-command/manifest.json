@@ -38,12 +38,12 @@
   "src/command.rs": "173343f37c4978436965b8d2cf59afdec8256a73194679a414c5fd6dc86eadca",
   "src/context_menu.rs": "6c154f575b6520f7117a9ed1ec3c01152b687e320d284e763be726915a31f4d3",
   "src/data_table.rs": "a86083838bc64a51e268ab58445d1ac6ad166c4a09f4a4e404eb64214c633eb8",
-  "src/date_picker.rs": "140b648f3ba87f173f786fcf3cb5475b0d1da215987e8abc8ce23b3f3b7a1129",
+  "src/date_picker.rs": "05ca556d8e2d8ff53cc2ca6d0db971c6e2d373c5bee605101d1b19bfe63d9e35",
   "assets/avatar-1.jpg": "778f0f153869b90583b830ae55040af3450ca4d7ddf42e7e4571d0aef5837bcb",
   "assets/avatar-12.jpg": "cc39a907b13e3ed9f338da9d7ed985467345d8b1b87d5fb03621593c7d67abb7",
   "assets/avatar-32.jpg": "14ac138dac42b67cef53c9bade870af020f595faebeef9bb1490859c65279228",
   "assets/avatar-47.jpg": "a4eef5862edad3268e4cb470a6d9a17a11b8d059ea884196aab998beb2fafdff",
   "pkg/justdo_command.js": "70c243f7f6b9d28c5088ca5acd81e02b27884c8053ed4b1e986051ad35cbcf18",
-  "pkg/justdo_command_bg.wasm": "c3b2a390b44667f183314f9f34523cc99bd8a6bda8029e06319b56a7da590a1b",
-  "source.zip": "501ae4ad56212dac216dc419851b5bae134bbf4d5f083b7189651d90a34db4bc"
+  "pkg/justdo_command_bg.wasm": "b9c6ea1126cabf138f05a6dd47d8269f71b4a932cd9f3d48f6af35fb366fb29c",
+  "source.zip": "ccc37d9e5c667035c0453eff31c2829afe896b3b46ffab6a69b118647a6eff73"
 }
