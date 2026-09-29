@@ -23,6 +23,8 @@ pub mod command;
 pub mod context_menu;
 pub mod data_table;
 pub mod date_picker;
+#[cfg(not(target_family = "wasm"))]
+pub mod gallery;
 
 pub mod motion_button;
 pub mod motion_tabs;

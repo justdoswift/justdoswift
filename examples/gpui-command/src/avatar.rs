@@ -475,6 +475,23 @@ pub fn setup(variant: &str, dark: bool, cx: &mut App) {
 }
 
 #[cfg(not(target_family = "wasm"))]
+/// Mounts this module's demo inside the shared gallery window.
+pub fn demo_view(variant: &str, dark: bool, _window: &mut Window, cx: &mut App) -> AnyView {
+    cx.new(|_| AvatarDemo {
+        kind: match variant {
+            "badge" => DemoKind::Badge,
+            "badge-icon" => DemoKind::BadgeIcon,
+            "group" => DemoKind::Group,
+            "group-count" => DemoKind::GroupCount,
+            "group-icon" => DemoKind::GroupIcon,
+            "sizes" => DemoKind::Sizes,
+            _ => DemoKind::Basic,
+        },
+        dark,
+    })
+    .into()
+}
+
 pub fn run_native(variant: &str) {
     let variant = variant.to_string();
     kit::application().run(move |cx| setup(&variant, false, cx));

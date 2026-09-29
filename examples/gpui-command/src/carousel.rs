@@ -478,6 +478,11 @@ pub fn setup(variant: &str, dark: bool, cx: &mut App) {
 }
 
 #[cfg(not(target_family = "wasm"))]
+/// Mounts this module's demo inside the shared gallery window.
+pub fn demo_view(variant: &str, dark: bool, _window: &mut Window, cx: &mut App) -> AnyView {
+    cx.new(|cx| CarouselDemo::new(variant, dark, cx)).into()
+}
+
 pub fn run_native(variant: &str) {
     let variant = variant.to_string();
     kit::application().run(move |cx| setup(&variant, false, cx));

@@ -71,6 +71,8 @@ fn main() {
         justdo_command::data_table::run_native(
             args.get(index + 1).map(String::as_str).unwrap_or("basic"),
         );
+    } else if args.iter().any(|arg| arg == "--gallery") {
+        justdo_command::gallery::run_native();
     } else if let Some(index) = args.iter().position(|arg| arg == "--date-picker") {
         justdo_command::date_picker::run_native(
             args.get(index + 1).map(String::as_str).unwrap_or("basic"),
