@@ -159,4 +159,12 @@ export const gpuiComponents = [
     category: "Navigation",
     platform: "Desktop",
   },
+  {
+    slug: "data-table",
+    title: "Data Table",
+    href: "/gpui/data-table",
+    description: "排序、过滤、分页、行选择、列可见性与行操作一体的数据表格。",
+    category: "Data Display",
+    platform: "Desktop",
+  },
 ] as const;

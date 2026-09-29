@@ -67,6 +67,10 @@ fn main() {
         justdo_command::context_menu::run_native(
             args.get(index + 1).map(String::as_str).unwrap_or("basic"),
         );
+    } else if let Some(index) = args.iter().position(|arg| arg == "--data-table") {
+        justdo_command::data_table::run_native(
+            args.get(index + 1).map(String::as_str).unwrap_or("basic"),
+        );
     } else if let Some(index) = args.iter().position(|arg| arg == "--card") {
         justdo_command::card::run_native(
             args.get(index + 1).map(String::as_str).unwrap_or("basic"),
