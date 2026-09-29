@@ -207,7 +207,7 @@ kbd { font-family: inherit; font-size: 10px; line-height: 1; border: 1px solid v
 .workbench-actions { display: flex; gap: 5px; }
 .workbench-body { min-width: 0; }
 .workbench-preview { height: 380px; position: relative; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
-.workbench-preview.is-date-picker { height: 800px; }
+.workbench-preview.is-date-picker { height: 920px; }
 .workbench-preview .preview-stage { padding-bottom: 32px; }
 .workbench-preview.is-video { height: auto; }
 .workbench-preview.is-video .preview-stage { height: auto; aspect-ratio: 1; max-width: 560px; margin-inline: auto; padding: 0; }

@@ -618,7 +618,7 @@ impl Render for DatePicker {
                     .flex_col()
                     .size_full()
                     .items_center()
-                    .pt(px(28.))
+                    .pt(px(18.))
                     .child(field),
             );
 
