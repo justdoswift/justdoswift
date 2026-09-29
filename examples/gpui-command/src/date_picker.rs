@@ -667,20 +667,30 @@ impl Render for DatePicker {
                         ),
                 );
             }
-            // Anchor below the trigger, clamped inside the component.
-            let local_x = tb.origin.x - _root.origin.x;
-            let local_y = tb.origin.y - _root.origin.y + tb.size.height + px(6.);
+            // Anchor centered under the trigger (shadcn align="center"),
+            // free to overflow the component's own bounds; flip upward when
+            // there's more room above than below.
             let popover_w = if self.mode == CalendarMode::Range {
                 px(560.)
             } else {
                 px(296.)
             };
-            let max_x = if _root.size.width > popover_w {
-                _root.size.width - popover_w
+            let popover_h = px(360.)
+                + if self.time_input.is_some() {
+                    px(44.)
+                } else {
+                    px(0.)
+                };
+            let local_x = tb.origin.x - _root.origin.x + (tb.size.width - popover_w) / 2.;
+            let below_y = tb.origin.y - _root.origin.y + tb.size.height + px(6.);
+            let above_y = tb.origin.y - _root.origin.y - px(6.) - popover_h;
+            let room_below = _root.size.height - (tb.origin.y - _root.origin.y + tb.size.height);
+            let room_above = tb.origin.y - _root.origin.y;
+            let local_y = if room_below < popover_h && room_above > room_below {
+                above_y
             } else {
-                px(0.)
+                below_y
             };
-            let local_x = clamp_p(local_x, px(0.), max_x);
             overlay = overlay.child(
                 div()
                     .absolute()
@@ -692,16 +702,6 @@ impl Render for DatePicker {
         }
 
         root
-    }
-}
-
-fn clamp_p(v: Pixels, lo: Pixels, hi: Pixels) -> Pixels {
-    if v < lo {
-        lo
-    } else if v > hi {
-        hi
-    } else {
-        v
     }
 }
 
