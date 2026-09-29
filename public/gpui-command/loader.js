@@ -61,8 +61,12 @@ function startPreview(run) {
 
 try {
   if (!navigator.gpu) throw new Error('This preview needs a browser with WebGPU enabled. Try a current Chrome or Edge on desktop, or run the native demo.');
-  const wasm = await import('./pkg/justdo_command.js');
-  await wasm.default();
+  // Pin the wasm/js URLs to the build checksum so browsers never run a
+  // stale cached build after an update.
+  const manifest = await fetch('./manifest.json', { cache: 'no-store' }).then((r) => r.json()).catch(() => null);
+  const build = manifest?.['pkg/justdo_command_bg.wasm']?.slice(0, 12) || '';
+  const wasm = await import(`./pkg/justdo_command.js?v=${build}`);
+  await wasm.default(build ? `./pkg/justdo_command_bg.wasm?v=${build}` : undefined);
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   await startPreview(() => {
     if (demo === 'alert') wasm.run_alert(params.get('variant') || 'default', dark, reducedMotion);
@@ -81,6 +85,11 @@ try {
     else if (demo === 'card') wasm.run_card(params.get('variant') || 'basic', dark, reducedMotion);
     else if (demo === 'carousel') wasm.run_carousel(params.get('variant') || 'basic', dark, reducedMotion);
     else if (demo === 'chart') wasm.run_chart(params.get('variant') || 'bar', dark, reducedMotion);
+    else if (demo === 'checkbox') wasm.run_checkbox(params.get('variant') || 'basic', dark, reducedMotion);
+    else if (demo === 'collapsible') wasm.run_collapsible(params.get('variant') || 'basic', dark, reducedMotion);
+    else if (demo === 'combobox') wasm.run_combobox(params.get('variant') || 'basic', dark, reducedMotion);
+    else if (demo === 'command') wasm.run_command(params.get('variant') || 'basic', dark, reducedMotion);
+    else if (demo === 'context-menu') wasm.run_context_menu(params.get('variant') || 'basic', dark, reducedMotion);
     else wasm.run_metallic(params.get('variant') || 'metallic', dark, reducedMotion);
   });
   status.setAttribute('aria-busy', 'false');

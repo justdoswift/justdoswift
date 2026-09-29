@@ -226,6 +226,7 @@ fn chevron(progress: f32, color: Hsla) -> impl IntoElement {
             }
         },
     )
+    .size_full()
 }
 
 impl Render for Accordion {

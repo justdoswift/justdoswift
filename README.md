@@ -17,6 +17,8 @@ A desktop component library built with Rust and GPUI. Components are modeled on 
 - `/gpui/card`: Header/content/footer containers with a spacing scale and edge-to-edge media.
 - `/gpui/carousel`: Embla-style slide carousels — animated track, prev/next controls, loop, vertical axis and arrow-key navigation.
 - `/gpui/chart`: Hand-painted charts — grouped/stacked bars, line, area and donut with hover tooltips, legends and theming.
+- `/gpui/checkbox`: Tri-state checkboxes — label/description fields, invalid and disabled states, table select-all.
+- `/gpui/collapsible`: Expandable panels — chevron triggers, height-reveal animation, nested file trees.
 
 The homepage, navigation, search and sitemap use `lib/gpui-components.ts` as the published component list. Earlier component pages are no longer published; their implementation files remain in the repository.
 

@@ -24,3 +24,6 @@ debug = 0
 [profile.release]
 opt-level = "s"
 strip = true
+
+[dev-dependencies]
+gpui-kit = { version = "=0.6.6", default-features = false, features = ["test-support"] }
